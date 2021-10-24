@@ -1,35 +1,19 @@
-const CounterPage = require('../pageobjects/counter.page');
-
 describe('The counter screen', () => {
     beforeEach(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000    // timeout: 10 seconds
     });
 
     it('should sum correctly', async () => {
+        const add = await $('~add_button')
+        await add.click()
+        await add.click()
 
-        // CounterPage.sum();
+        const sub = await $('~sub_button')
+        await sub.click()
 
-        const elem = await $('~add_button')
-        await elem.click()
-
+        await add.click()
 
         const lab = await $('~value_label')
-        expect(await lab.getText()).toBe("1")
-
-        
-
-        // expect(CounterPage.value).toBe("1");
-
-
-        // CounterPage.sum();
-        // jasmine.clock().tick(500);
-
-        // CounterPage.sub();
-        // jasmine.clock().tick(500);
-
-        // CounterPage.sum();
-        // jasmine.clock().tick(10500);
-
-        // expect(CounterPage.value).toBe("2");
+        expect(await lab.getText()).toBe("2")
     });
 });
